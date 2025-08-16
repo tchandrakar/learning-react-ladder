@@ -1,11 +1,12 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 
-const Card = (props) => {
+const Card = ( { name, email, id } ) => {
   return (
     <div>
-      <h2>{props.name}</h2>
-      <p>{props.email}</p>
+      <img src={`https://robohash.org/${id}?set=set2&size=180x180`} alt={`monster ${name}`} />
+      <h2>{name}</h2>
+      <p>{email}</p>
     </div>
   );
 }
@@ -25,7 +26,7 @@ const App = () => {
   return (
     <>
       {monsters.map((monster, idx) => {
-        return <Card key={`${monster.name}-${idx}`} name={monster.name} email={monster.email} />
+        return <Card key={`${monster.name}-${monster.id}`} name={monster.name} email={monster.email} id={monster.id} />
       })}
     </>
   )
