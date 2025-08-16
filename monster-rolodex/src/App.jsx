@@ -11,12 +11,18 @@ const Card = (props) => {
 }
 
 const App = () => {
+  const cards = [
+    { name: 'John Doe', email: 'john@doe.com' },
+    { name: 'Jane Doe', email: 'jane@doe.com' },
+    { name: 'Jim Doe', email: 'jim@doe.com' },
+  ];
   return (
     <>
       <h1>Monster Rolodex</h1>
-      <Card name="John Doe" email="john@doe.com" />
-      <Card name="Jane Doe" email="jane@doe.com" />
-      <Card name="Jim Doe" email="jim@doe.com" />
+      {cards.map((card, index) => (
+        console.log(`${card.name} ${index}`),
+        <Card key={index} {...card} />
+      ))}
     </>
   )
 }
