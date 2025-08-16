@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Card = (props) => {
   return (
@@ -16,6 +16,11 @@ const App = () => {
     { name: 'Jane Doe', email: 'jane@doe.com' },
     { name: 'Jim Doe', email: 'jim@doe.com' },
   ]);
+
+  useEffect(() => {
+    console.log('useEffect');
+  }, [])
+
   return (
     <>
       <h1>Monster Rolodex</h1>
