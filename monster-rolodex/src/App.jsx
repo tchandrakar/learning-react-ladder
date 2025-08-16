@@ -1,7 +1,7 @@
 import './App.css'
+import { useState } from 'react'
 
 const Card = (props) => {
-  console.log({ props });
   return (
     <div>
       <h2>{props.name}</h2>
@@ -11,18 +11,25 @@ const Card = (props) => {
 }
 
 const App = () => {
-  const cards = [
+  const [monsters, setMonsters] = useState([
     { name: 'John Doe', email: 'john@doe.com' },
     { name: 'Jane Doe', email: 'jane@doe.com' },
     { name: 'Jim Doe', email: 'jim@doe.com' },
-  ];
+  ]);
   return (
     <>
       <h1>Monster Rolodex</h1>
-      {cards.map((card, index) => (
-        console.log(`${card.name} ${index}`),
-        <Card key={index} {...card} />
+      {monsters.map((monster, index) => (
+        console.log(`${monster.name} ${index}`),
+        <Card key={index} {...monster} />
       ))}
+      <button 
+        onClick={() => 
+          setMonsters((monsters) => [...monsters, { name: 'Larry Doe', email: 'larry@doe.com' }])
+        }
+      >
+        Add Monster
+      </button>
     </>
   )
 }
