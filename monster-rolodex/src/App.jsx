@@ -1,6 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import CardList from './components/card-list/card-list.component'
+import SearchBox from './components/search-box/search-box.component'
 
 const App = () => {
   const [monsters, setMonsters] = useState([]);
@@ -15,14 +16,19 @@ const App = () => {
       })
   }, [])
 
+  const onSearchChange = (event) => {
+    const searchField = event.target.value.toLowerCase();
+    const filteredMonsters = monsters.filter((monster) => monster.name.toLowerCase().includes(searchField));
+    setFilteredMonsters(filteredMonsters);
+  }
+
   return (
     <>
-      <input type="search" placeholder="search monsters" onChange={(event) => {
-        const searchField = event.target.value.toLowerCase();
-        const filteredMonsters = monsters.filter((monster) => monster.name.toLowerCase().includes(searchField));
-        setFilteredMonsters(filteredMonsters);
-      }} />
-      <CardList monsters={filteredMonsters} />
+      <div className="app-container">
+        <h1 className="app-title">Monsters Rolodex</h1>
+        <SearchBox onChangeHandler={onSearchChange} />
+        <CardList monsters={filteredMonsters} />
+      </div>
     </>
   )
 }
