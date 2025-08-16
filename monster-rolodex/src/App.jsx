@@ -11,30 +11,22 @@ const Card = (props) => {
 }
 
 const App = () => {
-  const [monsters, setMonsters] = useState([
-    { name: 'John Doe', email: 'john@doe.com' },
-    { name: 'Jane Doe', email: 'jane@doe.com' },
-    { name: 'Jim Doe', email: 'jim@doe.com' },
-  ]);
+  const [monsters, setMonsters] = useState([]);
 
   useEffect(() => {
-    console.log('useEffect');
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response) => response.json())
+      .then((users) => {
+        console.log(users);
+        setMonsters(users)
+      })
   }, [])
 
   return (
     <>
-      <h1>Monster Rolodex</h1>
-      {monsters.map((monster, index) => (
-        console.log(`${monster.name} ${index}`),
-        <Card key={index} {...monster} />
-      ))}
-      <button 
-        onClick={() => 
-          setMonsters((monsters) => [...monsters, { name: 'Larry Doe', email: 'larry@doe.com' }])
-        }
-      >
-        Add Monster
-      </button>
+      {monsters.map((monster, idx) => {
+        return <Card key={`${monster.name}-${idx}`} name={monster.name} email={monster.email} />
+      })}
     </>
   )
 }
